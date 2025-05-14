@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.querySelector('.theme-toggle');
     const themeIcon = themeToggle.querySelector('i');
     const navbar = document.querySelector('.navbar');
+    const body = document.body;
 
     // Navbar scroll animation with debouncing
     let scrollTimeout;
@@ -51,8 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Theme toggle click handler
     themeToggle.addEventListener('click', () => {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        setTheme(!isDark);
+        body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+        themeToggle.querySelector('i').classList.toggle('fa-moon');
+        themeToggle.querySelector('i').classList.toggle('fa-sun');
     });
 
     // Mobile menu toggle
@@ -141,6 +143,45 @@ document.addEventListener('DOMContentLoaded', () => {
         
         card.addEventListener('mouseleave', () => {
             card.style.transform = 'translateY(0)';
+        });
+    });
+
+    // Scroll Animations
+    const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.content-card, .country-header, .bibliography-item, img');
+        
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const elementBottom = element.getBoundingClientRect().bottom;
+            const isVisible = (elementTop < window.innerHeight - 100) && (elementBottom > 0);
+            
+            if (isVisible) {
+                element.classList.add('animate');
+            }
+        });
+    };
+
+    // Initial check for elements in view
+    window.addEventListener('load', animateOnScroll);
+
+    // Check for elements in view on scroll
+    window.addEventListener('scroll', animateOnScroll);
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                // Close mobile menu if open
+                if (window.innerWidth <= 768) {
+                    navLinks.style.display = 'none';
+                }
+            }
         });
     });
 }); 
