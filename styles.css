@@ -305,6 +305,10 @@ img.animate {
     cursor: pointer;
 }
 
+h2.conc {
+    font-size: 60px;
+}
+
 .country-flag:hover {
     transform: perspective(1000px) rotateY(0deg) scale(1.05);
     box-shadow: var(--shadow-lg);
@@ -811,5 +815,239 @@ footer::before {
 
     .citation-number {
         align-self: flex-start;
+    }
+}
+
+/* SEEP Analysis Section */
+.seep-section {
+    padding: 120px 0;
+    background-color: var(--light-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.seep-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-dark);
+    opacity: 0.05;
+    z-index: 0;
+}
+
+.seep-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+    position: relative;
+    z-index: 1;
+}
+
+.seep-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.seep-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.seep-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.seep-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+.seep-card:hover::before {
+    opacity: 0.05;
+}
+
+.seep-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.seep-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.seep-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--gradient-primary);
+    transition: var(--transition);
+}
+
+.seep-card:hover h3::after {
+    width: 100%;
+}
+
+.seep-content {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.seep-content p {
+    margin-bottom: 1.5rem;
+}
+
+.seep-content ul {
+    list-style: none;
+    margin: 1rem 0 1.5rem 1.5rem;
+}
+
+.seep-content ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.seep-content ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.seep-content blockquote {
+    border-left: 4px solid var(--primary-color);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+}
+
+[data-theme="dark"] .seep-content blockquote {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.political-map {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.political-map img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    margin: 0 auto;
+    display: block;
+}
+
+.image-caption {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.image-source {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.image-source:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+.seep-content strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .seep-content blockquote {
+        padding: 0.8rem 1rem;
+        margin: 1rem 0;
+    }
+    
+    .political-map {
+        margin: 1.5rem 0;
+    }
+    
+    .seep-content ul {
+        margin-left: 1rem;
+    }
+}
+
+/* SEEP Card Colors */
+.seep-card.social .seep-icon {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+}
+
+.seep-card.economic .seep-icon {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+}
+
+.seep-card.environmental .seep-icon {
+    background: linear-gradient(135deg, #8BC34A 0%, #689F38 100%);
+}
+
+.seep-card.political .seep-icon {
+    background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+}
+
+@media (max-width: 768px) {
+    .seep-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .seep-section {
+        padding: 80px 0;
+    }
+
+    .seep-section h2 {
+        font-size: 2rem;
     }
 } 
